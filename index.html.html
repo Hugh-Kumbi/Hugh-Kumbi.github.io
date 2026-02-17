@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hugh Chanetsa — Cybersecurity Professional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:   #0d1b2a;
+      --slate:  #1c2f45;
+      --steel:  #2a4460;
+      --gold:   #c9a84c;
+      --gold-lt:#e4c47a;
+      --white:  #f5f3ef;
+      --muted:  #8fa3b8;
+      --border: rgba(201,168,76,0.18);
+      --radius: 4px;
+      --serif:  'Cormorant Garamond', Georgia, serif;
+      --sans:   'DM Sans', sans-serif;
+      --mono:   'DM Mono', monospace;
+      --transition: 0.35s cubic-bezier(.4,0,.2,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--white); font-family: var(--sans); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+    a { color: var(--gold); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--gold-lt); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(13,27,42,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 600; letter-spacing: 0.02em; color: var(--white); }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--gold); }
+
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 4rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -20%; right: -10%;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+      background-size: 60px 60px; pointer-events: none;
+    }
+    .hero-label { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.2rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+    .hero h1 { font-family: var(--serif); font-size: clamp(3.5rem, 7vw, 6.5rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.01em; opacity: 0; animation: fadeUp 0.8s 0.4s forwards; }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero-sub { margin-top: 1.5rem; max-width: 560px; color: var(--muted); font-size: 1.05rem; font-weight: 300; opacity: 0; animation: fadeUp 0.8s 0.6s forwards; }
+    .hero-location { margin-top: 0.8rem; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); letter-spacing: 0.1em; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+    .hero-cta { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
+    .btn { display: inline-block; padding: 0.7rem 1.8rem; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; border-radius: var(--radius); transition: all var(--transition); cursor: pointer; }
+    .btn-primary { background: var(--gold); color: var(--navy); border: 1px solid var(--gold); }
+    .btn-primary:hover { background: var(--gold-lt); color: var(--navy); border-color: var(--gold-lt); }
+    .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+    .btn-outline:hover { background: rgba(201,168,76,0.1); }
+    .scroll-hint { position: absolute; bottom: 2.5rem; left: 4rem; display: flex; align-items: center; gap: 0.8rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--muted); opacity: 0; animation: fadeIn 1s 1.4s forwards; }
+    .scroll-hint::before { content: ''; display: block; width: 1px; height: 40px; background: linear-gradient(to bottom, transparent, var(--gold)); }
+
+    section { padding: 6rem 4rem; }
+    .section-label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.6rem; }
+    .section-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; line-height: 1.15; margin-bottom: 3rem; }
+    .section-title::after { content: ''; display: block; width: 48px; height: 2px; background: var(--gold); margin-top: 0.8rem; }
+
+    #about { background: var(--slate); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; font-weight: 300; }
+    .about-text p:first-of-type { color: var(--white); font-size: 1.05rem; }
+    .about-edu { margin-top: 1.5rem; }
+    .about-edu h4 { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+    .edu-item { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.8rem; padding-left: 1rem; border-left: 2px solid var(--border); }
+    .edu-item strong { color: var(--white); display: block; font-size: 0.9rem; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .stat-card { background: var(--navy); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; }
+    .stat-card .number { font-family: var(--serif); font-size: 2.8rem; font-weight: 600; color: var(--gold); line-height: 1; }
+    .stat-card .label { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; margin-top: 0.3rem; }
+
+    #skills { background: var(--navy); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .skill-group { background: var(--slate); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; }
+    .skill-group h3 { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--gold); margin-bottom: 1.2rem; }
+    .skill-tag { display: inline-block; background: rgba(201,168,76,0.08); border: 1px solid var(--border); color: var(--muted); font-size: 0.78rem; font-family: var(--mono); padding: 0.3rem 0.7rem; border-radius: 2px; margin: 0.2rem; transition: all var(--transition); }
+    .skill-tag:hover { background: rgba(201,168,76,0.18); color: var(--white); }
+
+    #projects { background: var(--slate); }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .project-card { background: var(--navy); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; transition: transform var(--transition), border-color var(--transition); position: relative; overflow: hidden; }
+    .project-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--gold); transition: height var(--transition); }
+    .project-card:hover { transform: translateY(-3px); border-color: rgba(201,168,76,0.4); }
+    .project-card:hover::before { height: 100%; }
+    .project-tag { display: inline-block; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); background: rgba(201,168,76,0.08); border: 1px solid var(--border); padding: 0.2rem 0.6rem; border-radius: 2px; margin-bottom: 1rem; }
+    .project-card h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin-bottom: 0.7rem; }
+    .project-card p { color: var(--muted); font-size: 0.9rem; font-weight: 300; }
+    .tech-stack { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+    .tech-pill { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); background: rgba(42,68,96,0.6); border: 1px solid var(--border); padding: 0.15rem 0.5rem; border-radius: 2px; }
+    .project-links { margin-top: 1.3rem; display: flex; gap: 1rem; }
+    .project-links a { font-size: 0.75rem; font-family: var(--mono); letter-spacing: 0.08em; color: var(--muted); transition: color var(--transition); }
+    .project-links a:hover { color: var(--gold); }
+
+    #certifications { background: var(--navy); }
+    .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .cert-card { background: var(--slate); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.8rem; display: flex; flex-direction: column; transition: border-color var(--transition); }
+    .cert-card:hover { border-color: rgba(201,168,76,0.45); }
+    .cert-icon { width: 44px; height: 44px; background: rgba(201,168,76,0.12); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1rem; }
+    .cert-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .cert-card .issuer { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+    .cert-card .cert-link { font-size: 0.72rem; font-family: var(--mono); margin-top: 0.6rem; }
+    .cert-card .year { margin-top: auto; padding-top: 1rem; font-family: var(--mono); font-size: 0.75rem; color: var(--gold); letter-spacing: 0.1em; }
+    .in-progress { color: #f0a500 !important; }
+
+    #blog { background: var(--slate); }
+    .blog-list { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .blog-item { background: var(--navy); padding: 1.6rem 2rem; display: flex; align-items: center; gap: 2rem; border-bottom: 1px solid var(--border); transition: background var(--transition); cursor: pointer; }
+    .blog-item:last-child { border-bottom: none; }
+    .blog-item:hover { background: var(--slate); }
+    .blog-date { font-family: var(--mono); font-size: 0.72rem; color: var(--gold); letter-spacing: 0.1em; white-space: nowrap; min-width: 90px; }
+    .blog-item h3 { font-family: var(--serif); font-size: 1.1rem; font-weight: 500; flex: 1; }
+    .blog-item p { color: var(--muted); font-size: 0.85rem; flex: 2; font-weight: 300; }
+    .blog-arrow { color: var(--muted); font-size: 1.2rem; transition: transform var(--transition); }
+    .blog-item:hover .blog-arrow { transform: translateX(4px); color: var(--gold); }
+
+    #cv { background: var(--navy); }
+    .cv-inner { max-width: 680px; text-align: center; margin: 0 auto; }
+    .cv-inner > p { color: var(--muted); font-weight: 300; margin-bottom: 2rem; }
+    .cv-preview { border: 1px solid var(--border); border-radius: var(--radius); padding: 3rem; background: var(--slate); margin-bottom: 2rem; text-align: left; }
+    .cv-preview h3 { font-family: var(--serif); font-size: 1.8rem; margin-bottom: 0.2rem; }
+    .cv-preview .cv-title { color: var(--gold); font-size: 0.78rem; font-family: var(--mono); letter-spacing: 0.1em; margin-bottom: 2rem; }
+    .cv-section { margin-bottom: 1.5rem; }
+    .cv-section h4 { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; margin-bottom: 0.8rem; }
+    .cv-row { display: flex; justify-content: space-between; margin-bottom: 0.4rem; }
+    .cv-row span:first-child { font-size: 0.88rem; }
+    .cv-row span:last-child { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+
+    #contact { background: var(--slate); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start; }
+    .contact-info p { color: var(--muted); font-weight: 300; margin-bottom: 2rem; }
+    .contact-method { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; font-size: 0.9rem; }
+    .contact-icon { color: var(--gold); font-size: 1rem; width: 20px; text-align: center; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-family: var(--mono); }
+    .form-group input, .form-group textarea { background: var(--navy); border: 1px solid var(--border); border-radius: var(--radius); padding: 0.8rem 1rem; color: var(--white); font-family: var(--sans); font-size: 0.9rem; outline: none; transition: border-color var(--transition); resize: vertical; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { min-height: 120px; }
+
+    footer { background: var(--navy); border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 0.8rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.8rem; color: var(--muted); }
+    .footer-links a:hover { color: var(--gold); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section, .hero { padding: 4rem 1.5rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .skills-grid, .certs-grid { grid-template-columns: 1fr 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .skills-grid, .certs-grid { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .blog-item p { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">Hugh<span>.</span>Chanetsa</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-grid"></div>
+    <p class="hero-label">// Cybersecurity Analyst &amp; Founder · Hiroshima, Japan</p>
+    <h1>Hugh Chanetsa<br><em>Securing the Future.</em></h1>
+    <p class="hero-sub">Cybersecurity professional and founder of Mei Vault Systems, specialising in vulnerability management, threat detection, SIEM operations, and secure system design.</p>
+    <p class="hero-location">📍 Hiroshima, Japan &nbsp;·&nbsp; UTC +09:00 &nbsp;·&nbsp; Open to global opportunities</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="https://drive.google.com/file/d/1d796lZVXzIRaN2d_zb3EQSSPzBnEQ3MK/view" target="_blank" class="btn btn-outline">Download CV</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+    <div class="scroll-hint">Scroll to explore</div>
+  </section>
+
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="section-label">// 01 — About Me</p>
+        <h2 class="section-title">Multidisciplinary Security Professional</h2>
+        <p>I'm Hugh Chanetsa — a cybersecurity analyst, software engineer, and founder based in Hiroshima, Japan. I'm building <a href="https://meivaultsystems.com/" target="_blank">Mei Vault Systems</a>, a security-focused startup developing practical security solutions and tooling.</p>
+        <p>My background spans computer science, business, and social sciences — a rare combination that lets me bridge the gap between deep technical security work and organisational risk communication, translating complex vulnerabilities into actionable intelligence for stakeholders at every level.</p>
+        <p>Actively seeking cybersecurity roles and open to collaboration on security research and tooling projects.</p>
+        <div class="about-edu">
+          <h4>Education</h4>
+          <div class="edu-item">
+            <strong>B.S. Computer Science (Software Engineering)</strong>
+            University of the People
+          </div>
+          <div class="edu-item">
+            <strong>B.Com (Hons) Management Studies</strong>
+            University of Cape Town
+          </div>
+          <div class="edu-item">
+            <strong>B.A. Social Sciences — IR, Economic History, Industrial Sociology</strong>
+            University of Cape Town
+          </div>
+        </div>
+        <br>
+        <a href="#contact" class="btn btn-outline">Let's work together →</a>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-card">
+          <div class="number">225+</div>
+          <div class="label">CVEs assessed across OpenVAS &amp; Nessus</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">5</div>
+          <div class="label">Compliance frameworks mapped (NIST, ISO, PCI, HIPAA, CIS)</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">4</div>
+          <div class="label">Enterprise lab environments built</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">20+</div>
+          <div class="label">Python security automation scripts</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <p class="section-label reveal">// 02 — Skills</p>
+    <h2 class="section-title reveal">Technical Expertise</h2>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <h3>Vulnerability Management</h3>
+        <span class="skill-tag">OpenVAS</span>
+        <span class="skill-tag">Nessus Essentials</span>
+        <span class="skill-tag">Nuclei</span>
+        <span class="skill-tag">CVSS Scoring</span>
+        <span class="skill-tag">Risk Prioritization</span>
+        <span class="skill-tag">Patch Management</span>
+        <span class="skill-tag">Multi-Scanner Correlation</span>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Security Operations &amp; SIEM</h3>
+        <span class="skill-tag">Splunk</span>
+        <span class="skill-tag">Chronicle</span>
+        <span class="skill-tag">Wazuh</span>
+        <span class="skill-tag">Suricata (IDS)</span>
+        <span class="skill-tag">Wireshark</span>
+        <span class="skill-tag">tcpdump</span>
+        <span class="skill-tag">Incident Response</span>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Infrastructure &amp; Networking</h3>
+        <span class="skill-tag">Windows Server 2025</span>
+        <span class="skill-tag">Active Directory</span>
+        <span class="skill-tag">Group Policy (GPO)</span>
+        <span class="skill-tag">Linux Admin</span>
+        <span class="skill-tag">TCP/IP · DNS · DHCP</span>
+        <span class="skill-tag">VMware</span>
+        <span class="skill-tag">Docker</span>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Development &amp; Automation</h3>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">PowerShell</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Bash / Shell</span>
+        <span class="skill-tag">Flask</span>
+        <span class="skill-tag">Jupyter Notebooks</span>
+        <span class="skill-tag">Git</span>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Compliance Frameworks</h3>
+        <span class="skill-tag">NIST 800-53</span>
+        <span class="skill-tag">ISO 27001</span>
+        <span class="skill-tag">CIS Controls</span>
+        <span class="skill-tag">PCI-DSS</span>
+        <span class="skill-tag">HIPAA</span>
+        <span class="skill-tag">NIST CSF</span>
+        <span class="skill-tag">Security Auditing</span>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Professional Skills</h3>
+        <span class="skill-tag">Executive Reporting</span>
+        <span class="skill-tag">Technical Writing</span>
+        <span class="skill-tag">Risk Communication</span>
+        <span class="skill-tag">Stakeholder Briefing</span>
+        <span class="skill-tag">Security Training</span>
+        <span class="skill-tag">Startup Founder</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <p class="section-label reveal">// 03 — Projects</p>
+    <h2 class="section-title reveal">Featured Work</h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <span class="project-tag">Vulnerability Management</span>
+        <h3>Vulnerability Management Portfolio</h3>
+        <p>End-to-end enterprise vulnerability assessment framework — 175+ vulnerable services across isolated lab environments (Metasploitable2/3, DVWA, OWASP Juice Shop), multi-scanner correlation (OpenVAS + Nessus), Flask real-time dashboard, Wazuh SIEM integration, and automated remediation workflows across 5 compliance frameworks.</p>
+        <div class="tech-stack">
+          <span class="tech-pill">OpenVAS</span><span class="tech-pill">Nessus</span><span class="tech-pill">Python</span><span class="tech-pill">Flask</span><span class="tech-pill">Wazuh</span><span class="tech-pill">Docker</span><span class="tech-pill">VMware</span><span class="tech-pill">NIST</span><span class="tech-pill">ISO 27001</span><span class="tech-pill">Jupyter</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Hugh-Kumbi/Vulnerability-Management-Portfolio" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-tag">Security Portfolio</span>
+        <h3>Cybersecurity Portfolio</h3>
+        <p>Comprehensive security project portfolio covering NIST framework implementations, security audits and risk assessments, Linux &amp; SQL security operations, threat detection with Wireshark/tcpdump/Suricata, SIEM deployments across Splunk and Chronicle, incident response playbooks, and Python automation scripts.</p>
+        <div class="tech-stack">
+          <span class="tech-pill">Python</span><span class="tech-pill">Linux</span><span class="tech-pill">SQL</span><span class="tech-pill">Wireshark</span><span class="tech-pill">Suricata</span><span class="tech-pill">Splunk</span><span class="tech-pill">NIST CSF</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Hugh-Kumbi/Cybersecurity-Portfolio" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-tag">Active Directory</span>
+        <h3>Active Directory Home Lab</h3>
+        <p>Enterprise-grade Windows Server 2025 AD environment with full AD DS deployment, domain configuration, Group Policy Objects implementation, user lifecycle management, security policy enforcement, DNS/DHCP setup, and PowerShell automation scripts for administrative workflows.</p>
+        <div class="tech-stack">
+          <span class="tech-pill">Windows Server 2025</span><span class="tech-pill">Active Directory</span><span class="tech-pill">PowerShell</span><span class="tech-pill">Group Policy</span><span class="tech-pill">DNS</span><span class="tech-pill">DHCP</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Hugh-Kumbi/Hugh-Kumbi-Active-Directory-Lab" target="_blank">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-tag">Python Automation</span>
+        <h3>Python-Driven Cybersecurity Case Study</h3>
+        <p>Real-world security automation demonstrating Python in SOC operations — login process automation and analysis, regex-based pattern detection in security logs, automated threat detection workflows, and investigation pipeline scripting for realistic incident response scenarios.</p>
+        <div class="tech-stack">
+          <span class="tech-pill">Python</span><span class="tech-pill">Regex</span><span class="tech-pill">Log Analysis</span><span class="tech-pill">Automation</span><span class="tech-pill">Jupyter</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/Hugh-Kumbi/Python-Driven-Cybersecurity-Case-Study" target="_blank">GitHub →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <p class="section-label reveal">// 04 — Certifications</p>
+    <h2 class="section-title reveal">Credentials</h2>
+    <div class="certs-grid">
+      <div class="cert-card reveal">
+        <div class="cert-icon">🛡️</div>
+        <h3>Google Cybersecurity Professional</h3>
+        <p class="issuer">Full 8-course specialisation covering threat detection, SIEM, incident response, Python security automation, and Linux/SQL security operations.</p>
+        <a class="cert-link" href="https://www.coursera.org/account/accomplishments/specialization/DTARLY81OKPO" target="_blank">View Certificate →</a>
+        <p class="year">Google / Coursera · 2024</p>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">🔐</div>
+        <h3>ISC2 Certified in Cybersecurity (CC)</h3>
+        <p class="issuer">ISC2 entry-level credential covering security principles, business continuity, access controls, network security, and incident response fundamentals.</p>
+        <a class="cert-link" href="https://www.linkedin.com/in/hugh-chanetsa/details/certifications/1739398720272/" target="_blank">View on LinkedIn →</a>
+        <p class="year">ISC2 · 2025</p>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">🌐</div>
+        <h3>Network &amp; Application Security</h3>
+        <p class="issuer">University of the People certification covering network protocols, application layer security, firewalls, and defence-in-depth strategies.</p>
+        <a class="cert-link" href="https://www.linkedin.com/in/hugh-chanetsa/details/certifications/1735599179427/" target="_blank">View on LinkedIn →</a>
+        <p class="year">UoPeople · 2024</p>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">📊</div>
+        <h3>Data Science Certificate</h3>
+        <p class="issuer">University of the People — data analysis, Python for data science, and statistical modelling with applications in security analytics.</p>
+        <a class="cert-link" href="https://www.linkedin.com/in/hugh-chanetsa/details/certifications/1732157734259/" target="_blank">View on LinkedIn →</a>
+        <p class="year">UoPeople · 2024</p>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">⚡</div>
+        <h3>CompTIA Security+</h3>
+        <p class="issuer in-progress">In progress — covering threats, vulnerabilities, cryptography, identity management, risk management, and cloud/hybrid security.</p>
+        <p class="year in-progress">CompTIA · In Progress</p>
+      </div>
+      <div class="cert-card reveal">
+        <div class="cert-icon">🚀</div>
+        <h3>Mei Vault Systems</h3>
+        <p class="issuer">Founder &amp; lead developer of a security-focused startup building practical cybersecurity solutions, tooling, and consulting services.</p>
+        <a class="cert-link" href="https://meivaultsystems.com/" target="_blank">Visit Website →</a>
+        <p class="year">Hiroshima, Japan · 2024–Present</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="blog">
+    <p class="section-label reveal">// 05 — Blog</p>
+    <h2 class="section-title reveal">Thoughts &amp; Write-ups</h2>
+    <div class="blog-list reveal">
+      <div class="blog-item">
+        <span class="blog-date">Coming Soon</span>
+        <h3>Building an Enterprise Vulnerability Management Lab from Scratch</h3>
+        <p>Setting up 175+ vulnerable services in an isolated environment for realistic CVE assessment using Metasploitable and DVWA.</p>
+        <span class="blog-arrow">→</span>
+      </div>
+      <div class="blog-item">
+        <span class="blog-date">Coming Soon</span>
+        <h3>SIEM with Wazuh: Correlating Alerts Across a Multi-Host Environment</h3>
+        <p>Custom correlation rules and dashboards in Wazuh for meaningful threat detection across a home lab infrastructure.</p>
+        <span class="blog-arrow">→</span>
+      </div>
+      <div class="blog-item">
+        <span class="blog-date">Coming Soon</span>
+        <h3>Python for Security Automation: Scripts Every Analyst Should Build</h3>
+        <p>Practical log parsing, regex threat detection, and automated reporting scripts from real security projects.</p>
+        <span class="blog-arrow">→</span>
+      </div>
+      <div class="blog-item">
+        <span class="blog-date">Coming Soon</span>
+        <h3>Active Directory Security: Misconfigurations I Found in My Own Lab</h3>
+        <p>Security gaps discovered while building a Windows Server 2025 AD environment — and how to fix them.</p>
+        <span class="blog-arrow">→</span>
+      </div>
+      <div class="blog-item">
+        <span class="blog-date">Coming Soon</span>
+        <h3>My Journey to ISC2 CC: Study Strategy &amp; Lessons Learned</h3>
+        <p>How I structured my preparation for ISC2 Certified in Cybersecurity while building Mei Vault Systems in Japan.</p>
+        <span class="blog-arrow">→</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="cv">
+    <p class="section-label reveal" style="text-align:center;">// 06 — Curriculum Vitae</p>
+    <h2 class="section-title reveal" style="text-align:center; max-width:400px; margin:0 auto 3rem;">Career Overview</h2>
+    <div class="cv-inner">
+      <div class="cv-preview reveal">
+        <h3>Hugh Chanetsa</h3>
+        <p class="cv-title">// CYBERSECURITY ANALYST &nbsp;·&nbsp; SOFTWARE ENGINEER &nbsp;·&nbsp; FOUNDER — MEI VAULT SYSTEMS</p>
+        <div class="cv-section">
+          <h4>Experience</h4>
+          <div class="cv-row"><span>Founder — Mei Vault Systems</span><span>2024 – Present</span></div>
+        </div>
+        <div class="cv-section">
+          <h4>Education</h4>
+          <div class="cv-row"><span>B.S. Computer Science (Software Engineering)</span><span>University of the People</span></div>
+          <div class="cv-row"><span>B.Com (Hons) Management Studies</span><span>University of Cape Town</span></div>
+          <div class="cv-row"><span>B.A. Social Sciences (IR, Economic History, Industrial Sociology)</span><span>University of Cape Town</span></div>
+        </div>
+        <div class="cv-section">
+          <h4>Certifications</h4>
+          <div class="cv-row"><span>Google Cybersecurity Professional Certificate</span><span>2024</span></div>
+          <div class="cv-row"><span>ISC2 Certified in Cybersecurity (CC)</span><span>2025</span></div>
+          <div class="cv-row"><span>Network &amp; Application Security — UoPeople</span><span>2024</span></div>
+          <div class="cv-row"><span>CompTIA Security+</span><span>In Progress</span></div>
+        </div>
+        <div class="cv-section">
+          <h4>Key Achievements</h4>
+          <div class="cv-row"><span>225+ CVEs assessed · 5 compliance frameworks · 4 enterprise labs · 20+ automation scripts</span><span></span></div>
+        </div>
+      </div>
+      <p>Download the full CV for a complete view of experience, projects, and references.</p>
+      <a href="https://drive.google.com/file/d/1d796lZVXzIRaN2d_zb3EQSSPzBnEQ3MK/view" target="_blank" class="btn btn-primary">Download Full CV</a>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p class="section-label">// 07 — Contact</p>
+        <h2 class="section-title">Let's Connect</h2>
+        <p>Open to cybersecurity roles, consulting engagements, security research collaborations, and speaking opportunities. Based in Hiroshima, Japan — available globally for remote positions.</p>
+        <div class="contact-method"><span class="contact-icon">✉</span><a href="mailto:chanetsa.hugh@protonmail.com">chanetsa.hugh@protonmail.com</a></div>
+        <div class="contact-method"><span class="contact-icon">🔗</span><a href="https://linkedin.com/in/hugh-chanetsa" target="_blank">linkedin.com/in/hugh-chanetsa</a></div>
+        <div class="contact-method"><span class="contact-icon">🐙</span><a href="https://github.com/Hugh-Kumbi" target="_blank">github.com/Hugh-Kumbi</a></div>
+        <div class="contact-method"><span class="contact-icon">𝕏</span><a href="https://x.com/hugh_chanetsa" target="_blank">@hugh_chanetsa</a></div>
+        <div class="contact-method"><span class="contact-icon">🌐</span><a href="https://meivaultsystems.com/" target="_blank">meivaultsystems.com</a></div>
+        <div class="contact-method"><span class="contact-icon">📸</span><a href="https://www.instagram.com/hugh_kumbi" target="_blank">@hugh_kumbi</a></div>
+      </div>
+      <div class="reveal">
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your full name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" placeholder="Role enquiry / collaboration / other" />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Tell me about your opportunity or project..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Hugh Chanetsa &nbsp;·&nbsp; <a href="https://meivaultsystems.com/" target="_blank">Mei Vault Systems</a> &nbsp;·&nbsp; Hiroshima, Japan</p>
+    <div class="footer-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certs</a>
+      <a href="#cv">CV</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
+      navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : ''; });
+    });
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Message Sent ✓';
+      btn.style.cssText = 'background:#2d6a4f;border-color:#2d6a4f;color:#fff;align-self:flex-start;';
+      setTimeout(() => {
+        btn.textContent = 'Send Message';
+        btn.style.cssText = 'align-self:flex-start;';
+        e.target.reset();
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
